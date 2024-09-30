@@ -16,10 +16,8 @@ class LoginForm {
         const username = this.usernameInput.value;
         const password = this.passwordInput.value;
         
-        // Verificación con las credenciales proporcionadas
         if (username === 'mor_2314' && password === '83r5^_') {
-            alert('Inicio de sesión exitoso');
-            // Aquí puedes redirigir al usuario a la página principal o realizar otras acciones
+            window.location.href = '../html/store.html'; // Redirige a la página de la tienda
         } else {
             this.showError('Credenciales inválidas. Por favor, intente de nuevo.');
         }
@@ -31,7 +29,6 @@ class LoginForm {
     }
 }
 
-// Inicializar el formulario cuando el DOM esté cargado
 document.addEventListener('DOMContentLoaded', () => {
     new LoginForm();
 });

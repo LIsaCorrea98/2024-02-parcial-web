@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Online - Tienda</title>
+    <link rel="stylesheet" href="../css/store-styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Shop Online</h1>
+            <p class="slogan">Anytime, anywhere</p>
+        </div>
+        <nav>
+            <button id="cartButton" aria-label="Ver carrito">🛒</button>
+            <button id="logoutButton">Salir</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="search-section">
+            <form id="searchForm">
+                <label for="searchInput">Filtro de búsqueda:</label>
+                <input type="text" id="searchInput" name="search" placeholder="Nombre del producto">
+                <button type="submit">Buscar</button>
+            </form>
+            <div id="categoryTags" class="category-tags"></div>
+        </section>
+
+        <section class="products-section">
+            <h2>Productos</h2>
+            <div id="productList" class="product-grid"></div>
+        </section>
+    </main>
+
+    <script src="../js/store.js"></script>
+</body>
+</html>
