@@ -3,6 +3,7 @@ class LoginForm {
         this.form = document.getElementById('loginForm');
         this.usernameInput = document.getElementById('username');
         this.passwordInput = document.getElementById('password');
+        this.errorMessage = document.getElementById('errorMessage');
         this.init();
     }
 
@@ -15,13 +16,18 @@ class LoginForm {
         const username = this.usernameInput.value;
         const password = this.passwordInput.value;
         
-        // Aquí puedes agregar la lógica de verificación
-        // Por ahora, solo mostraremos un mensaje de alerta
-        if (username === 'usuario' && password === 'contraseña') {
+        // Verificación con las credenciales proporcionadas
+        if (username === 'mor_2314' && password === '83r5^_') {
             alert('Inicio de sesión exitoso');
+            // Aquí puedes redirigir al usuario a la página principal o realizar otras acciones
         } else {
-            alert('Error: Usuario o contraseña incorrectos');
+            this.showError('Credenciales inválidas. Por favor, intente de nuevo.');
         }
+    }
+
+    showError(message) {
+        this.errorMessage.textContent = message;
+        this.errorMessage.style.display = 'block';
     }
 }
 

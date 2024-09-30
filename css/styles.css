@@ -64,3 +64,11 @@ button:hover {
     text-decoration: underline;
     cursor: pointer;
 }
+
+
+
+.error-message {
+    color: #ff0000;
+    margin-top: 0.5rem;
+    display: none;
+}
