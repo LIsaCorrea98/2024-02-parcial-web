@@ -12,18 +12,21 @@
             margin-top: 1rem;
         }
         th, td {
-            border: 1px solid #4383be;
+            border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
         th {
-            background-color: #adf2f8;
+            background-color: #f2f2f2;
         }
-        .cart-details {
+        #cartDetails {
             display: none;
+            margin-top: 2rem;
         }
-        .cart-details.active {
-            display: block;
+        .action-link {
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -34,8 +37,7 @@
             <p class="slogan">Anytime, anywhere</p>
         </div>
         <nav>
-            <span id="welcomeMessage"></span>
-            <button id="cartButton" aria-label="Ver carrito">🛒</button>
+            <span id="userInfo"></span>
             <button id="logoutButton">Salir</button>
         </nav>
     </header>
@@ -55,8 +57,8 @@
             </table>
         </section>
 
-        <section id="cartDetails" class="cart-details">
-            <h2>Detalles del Pedido</h2>
+        <section id="cartDetails">
+            <h3>Detalles del Pedido</h3>
             <form id="cartForm">
                 <div>
                     <label for="cartDate">Fecha:</label>
@@ -72,7 +74,7 @@
                 </div>
             </form>
 
-            <h3>Relación de Productos</h3>
+            <h4>Relación de Productos</h4>
             <table id="productTable">
                 <thead>
                     <tr>
@@ -95,6 +97,6 @@
         </section>
     </main>
 
-    <script src="cart.js"></script>
+    <script src="../js/cart.js"></script>
 </body>
 </html>

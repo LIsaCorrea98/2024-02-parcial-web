@@ -2,21 +2,42 @@ class Store {
     constructor() {
         this.products = [];
         this.categories = [];
-        this.cart = [];
+        this.cart = JSON.parse(localStorage.getItem('cart')) || [];
         this.activeCategories = new Set();
+        this.currentUser = null;
         this.init();
     }
 
     init() {
+        this.fetchUser();
         this.fetchCategories();
         this.fetchProducts();
         this.setupEventListeners();
+        this.updateCartCount();
     }
 
     setupEventListeners() {
         document.getElementById('searchForm').addEventListener('submit', this.handleSearch.bind(this));
         document.getElementById('cartButton').addEventListener('click', this.viewCart.bind(this));
         document.getElementById('logoutButton').addEventListener('click', this.logout.bind(this));
+    }
+
+    fetchUser() {
+        // Simulamos un usuario logueado con ID 2
+        fetch('https://fakestoreapi.com/users/2')
+            .then(res => res.json())
+            .then(user => {
+                this.currentUser = user;
+                this.updateUserInfo();
+            })
+            .catch(error => console.error('Error fetching user:', error));
+    }
+
+    updateUserInfo() {
+        const userInfo = document.getElementById('userInfo');
+        if (userInfo && this.currentUser) {
+            userInfo.textContent = `Bienvenido, ${this.currentUser.username}`;
+        }
     }
 
     fetchCategories() {
@@ -30,24 +51,22 @@ class Store {
     }
 
     renderCategories() {
-        const categoryTags = document.getElementById('categoryTags');
+        const categoryContainer = document.getElementById('categoryContainer');
+        categoryContainer.innerHTML = '';
         this.categories.forEach(category => {
-            const tag = document.createElement('span');
-            tag.className = 'category-tag';
-            tag.textContent = category;
-            tag.addEventListener('click', () => this.toggleCategory(category));
-            categoryTags.appendChild(tag);
+            const button = document.createElement('button');
+            button.textContent = category;
+            button.className = 'category-button';
+            button.addEventListener('click', () => this.filterByCategory(category));
+            categoryContainer.appendChild(button);
         });
     }
 
-    toggleCategory(category) {
-        const tag = document.querySelector(`.category-tag:contains('${category}')`);
+    filterByCategory(category) {
         if (this.activeCategories.has(category)) {
             this.activeCategories.delete(category);
-            tag.classList.remove('active');
         } else {
             this.activeCategories.add(category);
-            tag.classList.add('active');
         }
         this.filterProducts();
     }
@@ -106,21 +125,38 @@ class Store {
     addToCart(productId) {
         const product = this.products.find(p => p.id === productId);
         if (product) {
-            this.cart.push(product);
+            const existingItem = this.cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                this.cart.push({ ...product, quantity: 1 });
+            }
+            this.updateCart();
             alert(`${product.title} added to cart!`);
         }
     }
 
+    updateCart() {
+        localStorage.setItem('cart', JSON.stringify(this.cart));
+        this.updateCartCount();
+    }
 
-    logout() {
-        window.location.href = '../html/login.html';
+    updateCartCount() {
+        const cartCount = document.getElementById('cartCount');
+        if (cartCount) {
+            const totalItems = this.cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+        }
     }
 
     viewCart() {
         window.location.href = '../html/cart.html';
     }
 
+    logout() {
+        localStorage.removeItem('cart');
+        window.location.href = '../html/login.html';
+    }
 }
 
 const store = new Store();
-
