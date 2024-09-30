@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Online - Carrito</title>
+    <link rel="stylesheet" href="../css/store-styles.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            border: 1px solid #4383be;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #adf2f8;
+        }
+        .cart-details {
+            display: none;
+        }
+        .cart-details.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Shop Online</h1>
+            <p class="slogan">Anytime, anywhere</p>
+        </div>
+        <nav>
+            <span id="welcomeMessage"></span>
+            <button id="cartButton" aria-label="Ver carrito">🛒</button>
+            <button id="logoutButton">Salir</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="cartList">
+            <h2>Relación de Pedidos</h2>
+            <table id="cartTable">
+                <thead>
+                    <tr>
+                        <th>Número</th>
+                        <th>Fecha de Solicitud</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="cartTableBody"></tbody>
+            </table>
+        </section>
+
+        <section id="cartDetails" class="cart-details">
+            <h2>Detalles del Pedido</h2>
+            <form id="cartForm">
+                <div>
+                    <label for="cartDate">Fecha:</label>
+                    <input type="text" id="cartDate" readonly>
+                </div>
+                <div>
+                    <label for="cartNumber">Pedido Número:</label>
+                    <input type="text" id="cartNumber" readonly>
+                </div>
+                <div>
+                    <label for="cartCustomer">Cliente:</label>
+                    <input type="text" id="cartCustomer" readonly>
+                </div>
+            </form>
+
+            <h3>Relación de Productos</h3>
+            <table id="productTable">
+                <thead>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Cantidad</th>
+                        <th>Valor</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody id="productTableBody"></tbody>
+            </table>
+            <div>
+                <strong>Total: </strong><span id="cartTotal"></span>
+            </div>
+            <div>
+                <button id="updateCart">Actualizar</button>
+                <button id="confirmCart">Confirmar</button>
+                <button id="continueShopping">Seguir Comprando</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="cart.js"></script>
+</body>
+</html>

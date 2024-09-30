@@ -111,14 +111,16 @@ class Store {
         }
     }
 
-    viewCart() {
-        console.log('Cart contents:', this.cart);
-        alert('Cart functionality coming soon!');
-    }
 
     logout() {
         window.location.href = '../html/login.html';
     }
+
+    viewCart() {
+        window.location.href = '../html/cart.html';
+    }
+
 }
 
 const store = new Store();
+
